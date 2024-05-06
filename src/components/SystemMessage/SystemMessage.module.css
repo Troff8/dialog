@@ -1,0 +1,22 @@
+.systemMessage {
+  max-width: 60%;
+  margin: 0 auto;
+  background: rgb(238, 238, 238);
+  border-radius: 15px;
+  color: rgb(119, 119, 119);
+  font-size: 13px;
+  line-height: 1.25;
+  overflow-wrap: anywhere;
+  padding: 8px 16px;
+  text-align: center;
+  width: fit-content;
+  word-break: normal;
+}
+.overflowing {
+  text-align: left;
+}
+@media (max-width: 768px) {
+  .systemMessage {
+    max-width: 80%;
+  }
+}

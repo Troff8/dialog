@@ -1,0 +1,20 @@
+:root {
+  --bg: #f7f8fa;
+  --bgSoft: #fff;
+  --text: #000000;
+  --textSoft: rgb(77, 59, 7);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: var(--bg);
+  color: var(--text);
+  font-family: SB Sans Text, sans-serif;
+  letter-spacing: -0.005em;
+  line-height: 22px;
+}
