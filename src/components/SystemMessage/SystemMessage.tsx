@@ -9,12 +9,13 @@ function SystemMessage({ message }: SystemMessageProps) {
   const [isOverflowing, setIsOverflowing] = useState(false);
 
   const messageRef = useRef<HTMLDivElement>(null);
+
   useLayoutEffect(() => {
     const node = messageRef.current;
     if (node) {
-      const lineHeight = parseInt(window.getComputedStyle(node).lineHeight);
-      const scrollHeight = node.scrollHeight;
-      const lines = Math.ceil(scrollHeight / lineHeight);
+      const lineHeight = parseFloat(getComputedStyle(node).lineHeight);
+      const height = node.clientHeight;
+      const lines = height / lineHeight;
       setIsOverflowing(lines > 4);
     }
   }, [message]);
