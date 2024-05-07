@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import Tag from "../Tag/Tag";
-import { sortTags } from "../../utils/sortTags";
+import { sortAlphabet } from "../../utils/sortTags";
 import { TagObject } from "../../types/tag";
 
 import styles from "./Tags.module.css";
@@ -13,7 +13,8 @@ function Tags({ tags }: TagsProps) {
   const [selectedTags, setSelectedTags] = useState<TagObject[]>([]);
 
   useEffect(() => {
-    setSelectedTags(sortTags(tags));
+    const sortedTags = tags.sort(sortAlphabet((item: TagObject) => item.label));
+    setSelectedTags(sortedTags);
   }, [tags]);
 
   const handleTagClick = (tag: TagObject) => {

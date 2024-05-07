@@ -1,6 +1,6 @@
-import { TagObject } from "../types/tag";
-
-export function sortTags(tags: TagObject[]): TagObject[] {
+export function sortAlphabet<T>(
+  getValue: (item: T) => string
+): (a: T, b: T) => number {
   const collator = new Intl.Collator("ru");
-  return tags.sort((a, b) => collator.compare(a.label, b.label));
+  return (a: T, b: T) => collator.compare(getValue(a), getValue(b));
 }
