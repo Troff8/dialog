@@ -1,4 +1,4 @@
 export interface MessageObject {
-  role: "system" | "user" | "assistant";
+  role: string;
   content: string;
 }

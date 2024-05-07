@@ -10,7 +10,6 @@ interface TagsProps {
 }
 
 function Tags({ tags }: TagsProps) {
-  console.log("render tags");
   const [selectedTags, setSelectedTags] = useState<TagObject[]>([]);
 
   useEffect(() => {
