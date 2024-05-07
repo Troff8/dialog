@@ -13,15 +13,11 @@ function Dialog({ dialog }: DialogProps) {
   return (
     <div className={styles.wrapper}>
       <DialogHeader />
-      {dialog.length === 0 ? (
-        <SystemMessage message="Загруженный диалог не имеет сообщений..." />
-      ) : (
-        dialog.map((message, index) =>
-          message.role === "system" ? (
-            <SystemMessage message={message.content} key={index} />
-          ) : (
-            <Message key={index} message={message} />
-          )
+      {dialog.map((message, index) =>
+        message.role === "system" ? (
+          <SystemMessage message={message.content} key={index} />
+        ) : (
+          <Message key={index} message={message} />
         )
       )}
     </div>
