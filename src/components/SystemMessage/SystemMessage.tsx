@@ -22,7 +22,7 @@ function SystemMessage({ message }: { message: string }) {
       }`}
       ref={messageRef}
     >
-      <div>{message}</div>
+      {message}
     </div>
   );
 }

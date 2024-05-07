@@ -1,4 +1,4 @@
-import { useMemo, useState } from "react";
+import { useState } from "react";
 import { TagObject } from "../../types/tag";
 import styles from "./Tag.module.css";
 
@@ -9,10 +9,6 @@ interface TagProps {
 function Tag({ tag }: TagProps) {
   const [select, setSelect] = useState(tag.selected);
 
-  const label = useMemo(() => {
-    return tag.label.length > 20 ? `${tag.label.slice(0, 20)}...` : tag.label;
-  }, [tag]);
-
   const handleClick = () => {
     setSelect(!select);
   };
@@ -22,7 +18,7 @@ function Tag({ tag }: TagProps) {
       className={`${styles.tag} ${select && styles.active}`}
       onClick={handleClick}
     >
-      <span>{label}</span>
+      {tag.label}
     </div>
   );
 }
