@@ -12,6 +12,7 @@
   color: #777 !important;
   user-select: none;
   cursor: pointer;
+  white-space: pre;
 }
 
 .tag:hover {
