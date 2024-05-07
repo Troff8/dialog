@@ -1,0 +1,20 @@
+.message {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  overflow-wrap: anywhere;
+  width: fit-content;
+  word-break: normal;
+  max-width: 65%;
+  border-radius: 12px 12px 12px 0px;
+  border: 2px solid rgb(233, 233, 233);
+  padding: 12px 20px;
+  background: rgb(255, 255, 255);
+  color: var(--text);
+}
+
+@media (max-width: 768px) {
+  .message {
+    max-width: 80%;
+  }
+}

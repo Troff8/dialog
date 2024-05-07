@@ -6,9 +6,6 @@
   width: fit-content;
   word-break: normal;
   max-width: 65%;
-}
-
-.messageUser {
   background-color: rgb(255, 241, 195);
   color: var(--textSoft);
   padding: 10px 18px 11px;
@@ -16,13 +13,6 @@
   align-self: flex-end;
 }
 
-.messageAssistant {
-  border-radius: 12px 12px 12px 0px;
-  border: 2px solid rgb(233, 233, 233);
-  padding: 12px 20px;
-  background: rgb(255, 255, 255);
-  color: var(--text);
-}
 @media (max-width: 768px) {
   .message {
     max-width: 80%;

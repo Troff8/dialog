@@ -1,7 +1,11 @@
 import { useLayoutEffect, useRef, useState } from "react";
+import { MessageObject } from "../../types/message";
 import styles from "./SystemMessage.module.css";
 
-function SystemMessage({ message }: { message: string }) {
+interface SystemMessageProps {
+  message: MessageObject;
+}
+function SystemMessage({ message }: SystemMessageProps) {
   const [isOverflowing, setIsOverflowing] = useState(false);
 
   const messageRef = useRef<HTMLDivElement>(null);
@@ -22,7 +26,7 @@ function SystemMessage({ message }: { message: string }) {
       }`}
       ref={messageRef}
     >
-      {message}
+      {message.content}
     </div>
   );
 }
