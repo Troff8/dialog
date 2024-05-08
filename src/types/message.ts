@@ -1,5 +1,5 @@
 export interface MessageObject {
-  role: string;
+  role?: string;
   content?: string;
   label?: string;
 }

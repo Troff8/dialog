@@ -2,10 +2,7 @@ import { useLayoutEffect, useRef, useState } from "react";
 import { MessageObject } from "../../types/message";
 import styles from "./SystemMessage.module.css";
 
-interface SystemMessageProps {
-  message: MessageObject;
-}
-function SystemMessage({ message }: SystemMessageProps) {
+function SystemMessage({ content }: MessageObject) {
   const [isOverflowing, setIsOverflowing] = useState(false);
 
   const messageRef = useRef<HTMLDivElement>(null);
@@ -18,14 +15,14 @@ function SystemMessage({ message }: SystemMessageProps) {
       const lines = height / lineHeight;
       setIsOverflowing(lines > 4);
     }
-  }, [message]);
+  }, [content]);
 
   return (
     <div
       className={`${styles.message} ${isOverflowing ? styles.overflowing : ""}`}
       ref={messageRef}
     >
-      {message.content}
+      {content}
     </div>
   );
 }

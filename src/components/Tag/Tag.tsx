@@ -2,20 +2,18 @@ import React from "react";
 import { TagObject } from "../../types/tag";
 import styles from "./Tag.module.css";
 
-interface TagProps {
-  tag: TagObject;
+interface TagProps extends TagObject {
   onClick: () => void;
-  selected: boolean;
 }
 
 const Tag = React.memo(
-  ({ tag, onClick, selected }: TagProps) => {
+  ({ label, onClick, selected }: TagProps) => {
     return (
       <div
         className={`${styles.tag} ${selected && styles.active}`}
         onClick={onClick}
       >
-        {tag.label}
+        {label}
       </div>
     );
   },

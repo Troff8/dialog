@@ -1,8 +1,8 @@
 import AssistantMessage from "../AssistantMessage/AssistantMessage";
 import SwipeableDrawer from "@mui/material/SwipeableDrawer";
 
-import styles from "./Questons.module.css";
-import React from "react";
+import styles from "./AnswerOptions.module.css";
+import React, { useState } from "react";
 import { Global } from "@emotion/react";
 
 import Typography from "@mui/material/Typography";
@@ -12,18 +12,25 @@ interface Queston {
   content: string;
 }
 
-interface QuestonsProps {
+interface AnswerOptionsProps {
   questons: Queston[];
 }
 
 const drawerBleeding = 56;
 
-function Questons({ questons }: QuestonsProps) {
+function AnswerOptions({ questons }: AnswerOptionsProps) {
   const [open, setOpen] = React.useState(false);
+  const [currentQueston, setCurrentQueston] = useState<Queston>();
   const toggleDrawer = (newOpen: boolean) => () => {
     setOpen(newOpen);
   };
   const isShowSwipe: boolean = window.screen.width < 1025 ? true : false;
+
+  const viewCurrentQueston = (label: string) => {
+    const index = questons.findIndex((question) => question.label === label);
+    if (index !== -1) setCurrentQueston(questons[index]);
+  };
+
   return (
     <>
       {isShowSwipe ? (
@@ -53,14 +60,23 @@ function Questons({ questons }: QuestonsProps) {
                 Выбор релевантных ответов
               </Typography>
             </div>
+            <div className={styles.labels}>
+              {questons.map((option, index) => (
+                <div
+                  className={styles.label}
+                  key={index}
+                  onClick={() => viewCurrentQueston(option.label)}
+                >
+                  {option.label}
+                </div>
+              ))}
+            </div>
             <div className={styles.questons}>
               <div className={styles.options}>
-                {questons.map((option, optionIndex) => (
-                  <AssistantMessage
-                    key={optionIndex}
-                    message={{ role: "assistant", ...option }}
-                  />
-                ))}
+                {/* {questons.map((option, optionIndex) => (
+                  <AssistantMessage key={optionIndex} {...option} />
+                ))} */}
+                {currentQueston && <AssistantMessage {...currentQueston} />}
               </div>
             </div>
           </SwipeableDrawer>
@@ -70,10 +86,7 @@ function Questons({ questons }: QuestonsProps) {
           <div className={styles.headerQuestons}>Выбор релевантных ответов</div>
           <div className={styles.options}>
             {questons.map((option, optionIndex) => (
-              <AssistantMessage
-                key={optionIndex}
-                message={{ role: "assistant", ...option }}
-              />
+              <AssistantMessage key={optionIndex} {...option} />
             ))}
           </div>
         </div>
@@ -82,4 +95,4 @@ function Questons({ questons }: QuestonsProps) {
   );
 }
 
-export default Questons;
+export default AnswerOptions;
