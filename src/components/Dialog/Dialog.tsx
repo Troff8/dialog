@@ -6,10 +6,23 @@ import UserMessage from "../UserMessage/UserMessage";
 import AssistantMessage from "../AssistantMessage/AssistantMessage";
 
 import styles from "./Dialog.module.css";
+import Questons from "../Questons/Questons";
+
+interface Option {
+  label: string;
+  content: string;
+}
+
+interface Message {
+  role: string;
+  content?: string;
+  options?: Option[];
+}
 
 interface DialogProps {
-  dialog: MessageObject[];
+  dialog: Message[];
 }
+
 interface MapMessages {
   [key: string]: React.ComponentType<{ message: MessageObject }>;
 }
@@ -21,11 +34,17 @@ const mapMessages: MapMessages = {
 function Dialog({ dialog }: DialogProps) {
   return (
     <div className={styles.wrapper}>
-      <DialogHeader />
-      {dialog.map((message, index) => {
-        const Message = mapMessages[message.role];
-        return <Message key={index} message={{ ...message }} />;
-      })}
+      <div className={styles.dialog}>
+        <DialogHeader />
+        {dialog.map((message, index) => {
+          if (message.options) return;
+          const Message = mapMessages[message.role];
+          return <Message key={index} message={{ ...message }} />;
+        })}
+      </div>
+      {dialog[dialog.length - 1].options && (
+        <Questons questons={dialog[dialog.length - 1].options!} /> //  FIXME
+      )}
     </div>
   );
 }

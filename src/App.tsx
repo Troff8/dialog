@@ -1,14 +1,13 @@
 import Dialog from "./components/Dialog/Dialog";
-
 import dialogTest from "./data/dialog.json";
 import tagsTest from "./data/tags.json";
+import Tags from "./components/Tags/Tags";
 
 import styles from "./App.module.css";
-import Tags from "./components/Tags/Tags";
-import { MessageObject } from "./types/message";
 
 function App() {
-  const dialog: MessageObject[] = dialogTest;
+  const dialog = dialogTest;
+
   return (
     <div className={styles.wrapper}>
       <Dialog dialog={dialog} />
