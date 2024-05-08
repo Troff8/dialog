@@ -5,8 +5,13 @@ interface AssistantMessageProps {
   message: MessageObject;
 }
 
-function AssistantMessage({ message }: AssistantMessageProps) {
-  return <div className={styles.message}>{message.content}</div>;
+export default function AssistantMessage({ message }: AssistantMessageProps) {
+  return (
+    <div
+      className={`${styles.message} ${message.label && styles.messageLabel}`}
+    >
+      {message.label && <div className={styles.label}>{message.label}</div>}
+      {message.content}
+    </div>
+  );
 }
-
-export default AssistantMessage;

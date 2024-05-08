@@ -22,9 +22,7 @@ function SystemMessage({ message }: SystemMessageProps) {
 
   return (
     <div
-      className={`${styles.systemMessage} ${
-        isOverflowing ? styles.overflowing : ""
-      }`}
+      className={`${styles.message} ${isOverflowing ? styles.overflowing : ""}`}
       ref={messageRef}
     >
       {message.content}
