@@ -59,9 +59,9 @@ function ResizableBox({
 
         const heightScreen = window.screen.height;
 
-        if (newTop - height > heightScreen / 2) setHeight(heightScreen - 35);
-        else if (height - newTop > height / 2) setHeight(35);
-        else if (newTop < 35) setHeight(35);
+        // if (newTop - height > heightScreen / 2) setHeight(heightScreen - 35);
+        // else if (height - newTop > height / 2) setHeight(35);
+        if (newTop < 35) setHeight(35);
         else if (heightScreen - newTop < 46) {
           setHeight(heightScreen - 35);
         } else setHeight(newTop);
