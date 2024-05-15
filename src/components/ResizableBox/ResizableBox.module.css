@@ -23,6 +23,8 @@
 }
 
 .wrapper .dimmed {
+  overflow: hidden;
+  cursor: pointer;
   opacity: 0.3;
 }
 

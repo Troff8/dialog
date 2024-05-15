@@ -127,7 +127,7 @@ function ResizableBox({
             fixed && openModal ? styles.dimmed : ""
           }`}
           onClick={handleCloseModal}
-          style={{ height: !isMobile ? "100%" : !fixed ? height : "100%" }}
+          style={{ height: !isMobile ? "100vh" : !fixed ? height : "100%" }}
         >
           {childOne}
         </div>
