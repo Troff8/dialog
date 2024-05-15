@@ -34,53 +34,7 @@ function AnswerOptions({ questons }: AnswerOptionsProps) {
   return (
     <>
       {isShowSwipe ? (
-        <>
-          <Global
-            styles={{
-              ".MuiDrawer-root > .MuiPaper-root": {
-                height: `calc(50% - ${drawerBleeding}px)`,
-                overflow: "visible",
-              },
-            }}
-          />
-          <SwipeableDrawer
-            anchor="bottom"
-            open={open}
-            onClose={toggleDrawer(false)}
-            onOpen={toggleDrawer(true)}
-            swipeAreaWidth={drawerBleeding}
-            disableSwipeToOpen={false}
-            ModalProps={{
-              keepMounted: true,
-            }}
-          >
-            <div className={styles.swipe}>
-              <div className={styles.puller} />
-              <Typography sx={{ p: 2, color: "text.secondary" }}>
-                Выбор релевантных ответов
-              </Typography>
-            </div>
-            <div className={styles.labels}>
-              {questons.map((option, index) => (
-                <div
-                  className={styles.label}
-                  key={index}
-                  onClick={() => viewCurrentQueston(option.label)}
-                >
-                  {option.label}
-                </div>
-              ))}
-            </div>
-            <div className={styles.questons}>
-              <div className={styles.options}>
-                {/* {questons.map((option, optionIndex) => (
-                  <AssistantMessage key={optionIndex} {...option} />
-                ))} */}
-                {currentQueston && <AssistantMessage {...currentQueston} />}
-              </div>
-            </div>
-          </SwipeableDrawer>
-        </>
+        <></>
       ) : (
         <div className={styles.questons}>
           <div className={styles.headerQuestons}>Выбор релевантных ответов</div>

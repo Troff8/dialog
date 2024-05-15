@@ -21,6 +21,7 @@ function App() {
         childTwo={
           <div
             style={{
+              background: "grey",
               padding: 10,
             }}
           >
@@ -51,6 +52,7 @@ function App() {
         maxSize={1000}
         minSize={200}
         opened
+        fixed
       ></ResizableBox>
       {/* <Tags tags={tagsTest} /> */}
     </div>
