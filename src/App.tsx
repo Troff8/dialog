@@ -48,8 +48,9 @@ function App() {
             aspernatur aut quia ullam inventore explicabo. Ea.
           </div>
         }
-        maxSize={1000}
-        minSize={200}
+        defaultSize={"300px"}
+        maxSize={"600px"}
+        minSize={"10%"}
         opened
       ></ResizableBox>
       {/* <Tags tags={tagsTest} /> */}
