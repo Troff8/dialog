@@ -21,6 +21,7 @@ function App() {
         childTwo={
           <div
             style={{
+              background: "grey",
               padding: 10,
             }}
           >
@@ -48,10 +49,10 @@ function App() {
             aspernatur aut quia ullam inventore explicabo. Ea.
           </div>
         }
-        defaultSize={"300px"}
-        maxSize={"600px"}
-        minSize={"10%"}
+        maxSize={1000}
+        minSize={200}
         opened
+        fixed
       ></ResizableBox>
       {/* <Tags tags={tagsTest} /> */}
     </div>
