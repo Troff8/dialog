@@ -12,7 +12,6 @@ interface ResizableBoxProps {
   fixed?: boolean;
 }
 
-// Helper function to parse size values
 const parseSize = (size: string, reference: number): number => {
   if (size.endsWith("%")) {
     return (parseFloat(size) / 100) * reference;
@@ -20,7 +19,7 @@ const parseSize = (size: string, reference: number): number => {
   if (size.endsWith("px")) {
     return parseFloat(size);
   }
-  return parseFloat(size); // Default to pixels if no unit
+  return parseFloat(size);
 };
 
 function ResizableBox({
@@ -35,7 +34,7 @@ function ResizableBox({
   const childTwoRef = useRef<HTMLDivElement>(null);
   const overlayRef = useRef<HTMLDivElement>(null);
   const [isResizing, setIsResizing] = useState(false);
-  const [height, setHeight] = useState(window.innerHeight - 35);
+  const [height, setHeight] = useState(window.innerHeight - 200);
   const [width, setWidth] = useState(
     parseSize(defaultSize, window.screen.width)
   );
@@ -57,6 +56,7 @@ function ResizableBox({
     }
   }, []);
 
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   const resizeMouseThrottled = useCallback(
     throttle(100, (event: MouseEvent) => {
       if (isResizing && childTwoRef.current) {
@@ -64,7 +64,6 @@ function ResizableBox({
         const sidebarRect = childTwoRef.current.getBoundingClientRect();
         const newWidth = sidebarRect.width - (clientX - sidebarRect.left);
 
-        // Parse sizes to pixels
         const minPx = parseSize(minSize, window.innerWidth);
         const maxPx = parseSize(maxSize, window.innerWidth);
 
@@ -74,24 +73,23 @@ function ResizableBox({
     [isResizing, minSize, maxSize]
   );
 
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   const resizeTouchThrottled = useCallback(
-    throttle(30, (event: TouchEvent) => {
+    throttle(60, (event: TouchEvent) => {
       if (isResizing && childTwoRef.current) {
         const touchY = event.touches[0].clientY;
         const sidebarRect = childTwoRef.current.getBoundingClientRect();
         const initialTop = sidebarRect.top;
         const newHeight = sidebarRect.height + (initialTop - touchY);
-        const newTop = sidebarRect.bottom - newHeight;
-
-        const heightScreen = window.screen.height;
-
-        if (newTop < 35) setHeight(35);
-        else if (heightScreen - newTop < 46) {
-          setHeight(heightScreen - 35);
-        } else setHeight(newTop);
+        const height = sidebarRect.bottom - newHeight;
+        if (window.innerHeight - height < 50) {
+          setHeight(window.innerHeight - 100);
+        } else {
+          setHeight(Math.max(35, Math.min(window.innerHeight, height)));
+        }
       }
     }),
-    [isResizing, minSize, maxSize]
+    [isResizing]
   );
   const handleCloseModal = () => {
     if (openModal && fixed) setOpenModal(false);
@@ -119,10 +117,17 @@ function ResizableBox({
   return (
     <div className={styles.wrapper}>
       <div className={styles.overlay} ref={overlayRef}></div>
-      <div className={styles.content}>
+      <div
+        className={`${styles.content} ${
+          isMobile && !fixed && styles.contentSwipe
+        }`}
+      >
         <div
-          className={` ${fixed && openModal ? styles.dimmed : ""}`}
+          className={`${styles.childOne} ${
+            fixed && openModal ? styles.dimmed : ""
+          }`}
           onClick={handleCloseModal}
+          style={{ height: !isMobile ? "100%" : !fixed ? height : "100%" }}
         >
           {childOne}
         </div>
@@ -131,7 +136,11 @@ function ResizableBox({
             style={{
               maxWidth: isMobile ? "100%" : maxSize,
               minWidth: minSize,
-              top: !isMobile ? 0 : !fixed ? height : 0,
+              height: !isMobile
+                ? "100%"
+                : !fixed
+                ? window.innerHeight - height
+                : "100%",
               width: !isMobile ? width : "100%",
             }}
             className={`${styles.childTwo} ${fixed && styles.childTwoFixed} ${
