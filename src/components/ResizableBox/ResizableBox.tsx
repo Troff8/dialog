@@ -23,7 +23,6 @@ const parseSize = (size: string, reference: number): number => {
   return parseFloat(size); // Default to pixels if no unit
 };
 
-// TODO : A clearer interface for understanding what can be stretched and what cannot
 function ResizableBox({
   childOne,
   childTwo,
@@ -41,6 +40,8 @@ function ResizableBox({
     parseSize(defaultSize, window.screen.width)
   );
   const [isMobile, setIsMobile] = useState(window.screen.width < 700);
+
+  const [openModal, setOpenModal] = useState(opened);
 
   const startResizing = useCallback(() => {
     setIsResizing(true);
@@ -92,7 +93,9 @@ function ResizableBox({
     }),
     [isResizing, minSize, maxSize]
   );
-
+  const handleCloseModal = () => {
+    if (openModal && fixed) setOpenModal(false);
+  };
   useEffect(() => {
     const handleResize = () => {
       setIsMobile(window.innerWidth < 700);
@@ -117,11 +120,16 @@ function ResizableBox({
     <div className={styles.wrapper}>
       <div className={styles.overlay} ref={overlayRef}></div>
       <div className={styles.content}>
-        <div>{childOne}</div>
-        {opened && (
+        <div
+          className={` ${fixed && openModal ? styles.dimmed : ""}`}
+          onClick={handleCloseModal}
+        >
+          {childOne}
+        </div>
+        {openModal && (
           <div
             style={{
-              maxWidth: maxSize,
+              maxWidth: isMobile ? "100%" : maxSize,
               minWidth: minSize,
               top: !isMobile ? 0 : !fixed ? height : 0,
               width: !isMobile ? width : "100%",
@@ -152,7 +160,14 @@ function ResizableBox({
                 startResizing();
               }}
             />
-            <div className={styles.childTwoContent}>{childTwo} </div>
+            <div className={styles.childTwoContent}>
+              {childTwo}
+              {openModal && fixed && (
+                <button onClick={handleCloseModal}>
+                  temp button close modal
+                </button>
+              )}
+            </div>
           </div>
         )}
       </div>

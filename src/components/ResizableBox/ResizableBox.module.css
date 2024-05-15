@@ -19,8 +19,11 @@
 
 .wrapper .content {
   display: flex;
-  /* height: 100%;
-  flex-direction: column; */
+  transition: background-color 0.3s ease;
+}
+
+.wrapper .dimmed {
+  opacity: 0.3;
 }
 
 .wrapper .resizer {
@@ -34,6 +37,7 @@
 .wrapper .resizer:hover {
   background: #3ea6da;
 }
+
 .resizerActive {
   background: #3ea6da;
 }
@@ -52,6 +56,11 @@
   top: 0;
   right: 0;
   height: 100%;
+}
+.childTwoContent {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
 }
 
 .swipe {
@@ -76,6 +85,7 @@
   align-items: center;
   justify-content: center;
 }
+
 .puller {
   content: "";
   width: 30px;
