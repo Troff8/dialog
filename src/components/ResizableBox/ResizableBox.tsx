@@ -21,7 +21,7 @@ function ResizableBox({
 }: ResizableBoxProps) {
   const childTwoRef = useRef<HTMLDivElement>(null);
   const [isResizing, setIsResizing] = useState(false);
-  const [height, setHeight] = useState(20);
+  const [height, setHeight] = useState(window.screen.height - 35);
   const [width, setWidth] = useState(maxSize);
 
   const startResizing = useCallback(() => {
