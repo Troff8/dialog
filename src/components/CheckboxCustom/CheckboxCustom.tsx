@@ -19,6 +19,7 @@ interface CheckboxProps {
   checked?: boolean;
   size?: "s" | "m";
   readonly?: boolean;
+  onChange?: () => void;
 }
 
 export const CheckboxCustom = ({
@@ -30,6 +31,7 @@ export const CheckboxCustom = ({
   checked,
   size = "s",
   readonly = false,
+  onChange,
 }: CheckboxProps) => {
   return (
     <Checkbox
@@ -40,6 +42,7 @@ export const CheckboxCustom = ({
       size={size}
       checked={checked}
       view={view}
+      onChange={onChange}
       style={{
         pointerEvents: readonly ? "none" : "all",
       }}

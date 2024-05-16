@@ -10,7 +10,7 @@ interface ResizableBoxProps {
   minSize: string;
   maxSize: string;
   opened: boolean;
-  fixed?: boolean;
+  isFixed?: boolean;
 }
 
 const parseSize = (size: string, reference: number): number => {
@@ -29,7 +29,7 @@ function ResizableBox({
   defaultSize,
   minSize,
   maxSize,
-  fixed,
+  isFixed,
   opened = true,
 }: ResizableBoxProps) {
   const childTwoRef = useRef<HTMLDivElement>(null);
@@ -40,8 +40,8 @@ function ResizableBox({
     parseSize(defaultSize, window.screen.width)
   );
   const [isMobile, setIsMobile] = useState(window.screen.width < 700);
-
   const [openModal, setOpenModal] = useState(opened);
+  const [fixed, setFixed] = useState(isFixed);
 
   const startResizing = useCallback(() => {
     setIsResizing(true);
@@ -171,7 +171,14 @@ function ResizableBox({
               }}
             />
             <div className={styles.childTwoContent}>
-              {!isMobile && <CheckboxCustom label="Fixed" size="s" readonly />}
+              {!isMobile && (
+                <CheckboxCustom
+                  label="Fixed"
+                  size="s"
+                  checked={fixed}
+                  onChange={() => setFixed(!fixed)}
+                />
+              )}
               {childTwo}
               {openModal && fixed && (
                 <button onClick={handleCloseModal}>

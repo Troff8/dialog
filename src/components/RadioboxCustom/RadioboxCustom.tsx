@@ -18,6 +18,7 @@ interface CheckboxProps {
     | undefined;
   size?: "s" | "m";
   readonly?: boolean;
+  onChange?: () => void;
 }
 
 export const RadioboxCustom = ({
@@ -28,6 +29,7 @@ export const RadioboxCustom = ({
   view = "default",
   size = "s",
   readonly = false,
+  onChange,
 }: CheckboxProps) => {
   return (
     <Radiobox
@@ -37,6 +39,7 @@ export const RadioboxCustom = ({
       disabled={disabled}
       size={size}
       view={view}
+      onChange={onChange}
       style={{
         pointerEvents: readonly ? "none" : "all",
       }}
