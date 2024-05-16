@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import styles from "./ResizableBox.module.css";
 import { throttle } from "throttle-debounce";
+import { CheckboxCustom } from "../CheckboxCustom/CheckboxCustom";
 
 interface ResizableBoxProps {
   childOne: React.ReactNode;
@@ -170,6 +171,7 @@ function ResizableBox({
               }}
             />
             <div className={styles.childTwoContent}>
+              {!isMobile && <CheckboxCustom label="Fixed" size="s" readonly />}
               {childTwo}
               {openModal && fixed && (
                 <button onClick={handleCloseModal}>

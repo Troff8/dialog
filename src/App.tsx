@@ -4,6 +4,9 @@ import dialogTest from "./data/dialog.json";
 import styles from "./App.module.css";
 import ResizableBox from "./components/ResizableBox/ResizableBox";
 import { useState } from "react";
+import { CheckboxArea } from "./components/CheckboxArea/CheckboxArea";
+import { CheckboxCustom } from "./components/CheckboxCustom/CheckboxCustom";
+import { RadioboxCustom } from "./components/RadioboxCustom/RadioboxCustom";
 
 function App() {
   const dialog = dialogTest;
@@ -24,6 +27,12 @@ function App() {
               padding: 10,
             }}
           >
+            <CheckboxArea orientation="vertical">
+              <CheckboxCustom label="Checkbox 1" />
+              <CheckboxCustom label="Checkbox 2" />
+              <RadioboxCustom label="radio" name="radio" />
+              <RadioboxCustom label="radio" name="radio" />
+            </CheckboxArea>
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempora,
             voluptas esse nobis doloremque corrupti modi laboriosam accusantium
             nihil possimus eveniet ullam assumenda aliquid, culpa minus
@@ -52,6 +61,7 @@ function App() {
         maxSize={"600px"}
         minSize={"10%"}
         opened
+        fixed
       ></ResizableBox>
       {/* <Tags tags={tagsTest} /> */}
     </div>
